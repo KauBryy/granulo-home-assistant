@@ -12,7 +12,7 @@ class GranuloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
         if user_input is not None:
             # Pour l'instant on valide juste qu'il y a un nom
-            return self.async_create_entry(title="Mon Poêle Granulo", data=user_input)
+            return self.async_create_entry(title="Mon Assistant Granulo", data=user_input)
 
         return self.async_show_form(
             step_id="user",

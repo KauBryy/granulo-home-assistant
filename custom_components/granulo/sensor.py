@@ -14,8 +14,8 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         # --- États & Maintenance ---
         GranuloSensor(device_id, device_name, "Stock", "stock", "sacs", "mdi:package-variant"),
         GranuloSensor(device_id, device_name, "Autonomie", "autonomie", "jours", "mdi:clock-end"),
-        GranuloSensor(device_id, device_name, "Depuis Vitre", "vitre", "sacs", "mdi:shimmer"),
-        GranuloSensor(device_id, device_name, "Depuis Entretien", "entretien", "sacs", "mdi:wrench-clock"),
+        GranuloSensor(device_id, device_name, "Depuis dernier Vitre", "vitre", "sacs", "mdi:shimmer"),
+        GranuloSensor(device_id, device_name, "Depuis dernier Entretien", "entretien", "sacs", "mdi:wrench-clock"),
         
         # --- Saison Actuelle ---
         GranuloSensor(device_id, device_name, "Achats Saison", "achat_saison", "sacs", "mdi:cart-arrow-down"),

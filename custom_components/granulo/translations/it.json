@@ -1,0 +1,51 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configurazione Granulo",
+        "description": "Inserisci il tuo ID Utente (UID) dall'app Granulo.",
+        "data": {
+          "user_id": "ID Utente (UID)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Connessione ai server Granulo fallita",
+      "invalid_auth": "ID Utente non valido",
+      "unknown": "Errore imprevisto"
+    },
+    "abort": {
+      "already_configured": "Questo account è già configurato."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "stock_actuel": { "name": "Stock Attuale" },
+      "stock_kg": { "name": "Stock (kg)" },
+      "achats_saison": { "name": "Acquisti Stagione" },
+      "brulages_saison": { "name": "Bruciature Stagione" },
+      "achats_total": { "name": "Acquisti Totali" },
+      "brulages_total": { "name": "Bruciature Totali" },
+      "depenses_saison": { "name": "Spese Stagione" },
+      "depenses_total": { "name": "Spese Totali" },
+      "moyenne_7j": { "name": "Media 7gg" },
+      "moyenne_mois": { "name": "Media Mensile" },
+      "moyenne_saison": { "name": "Media Stagione" },
+      "jours_restants": { "name": "Giorni Rimanenti" },
+      "vitre": { "name": "Pulizia Vetro" },
+      "entretien": { "name": "Manutenzione" }
+    },
+    "button": {
+      "refresh_data": { "name": "Aggiorna Dati" },
+      "burn_action": { "name": "Registra una Bruciatura" },
+      "purchase_action": { "name": "Registra un Acquisto" }
+    },
+    "number": {
+      "quantite": { "name": "Quantità (sacchi)" },
+      "prix": { "name": "Prezzo del sacco" }
+    },
+    "text": {
+      "note": { "name": "Nota Personale" }
+    }
+  }
+}

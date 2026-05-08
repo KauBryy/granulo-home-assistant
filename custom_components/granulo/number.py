@@ -10,10 +10,12 @@ async def async_setup_entry(hass, entry, async_add_entities):
     ])
 
 class GranuloInputNumber(NumberEntity):
+    _attr_has_entity_name = True
+
     def __init__(self, user_id, key, name, unit, icon, min_val, max_val):
         self.user_id = user_id
         self.key = key
-        self._attr_name = name
+        self._attr_translation_key = key
         self._attr_native_unit_of_measurement = unit
         self._attr_icon = icon
         self._attr_unique_id = f"granulo_input_v1_{user_id}_{key}"

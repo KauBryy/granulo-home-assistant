@@ -30,10 +30,12 @@ async def async_setup_entry(hass, entry, async_add_entities):
     async_add_entities(entities)
 
 class GranuloSensor(SensorEntity):
+    _attr_has_entity_name = True
+
     def __init__(self, coordinator, key, name, unit, icon):
         self.coordinator = coordinator
         self.key = key
-        self._attr_name = name
+        self._attr_translation_key = key
         self._attr_native_unit_of_measurement = unit
         self._attr_icon = icon
         self._attr_unique_id = f"granulo_v4_{coordinator.user_id}_{key}"

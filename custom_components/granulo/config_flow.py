@@ -20,7 +20,6 @@ class GranuloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=vol.Schema({
                 vol.Required("user_id"): str,
-                vol.Optional("name", default="Granulo"): str,
             }),
             errors=errors,
         )

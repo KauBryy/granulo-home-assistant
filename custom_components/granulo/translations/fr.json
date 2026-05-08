@@ -1,0 +1,51 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configuration Granulo",
+        "description": "Entrez votre ID Utilisateur (UID) trouvé dans l'application Granulo.",
+        "data": {
+          "user_id": "ID Utilisateur (UID)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Échec de la connexion aux serveurs Granulo",
+      "invalid_auth": "ID Utilisateur invalide",
+      "unknown": "Erreur inattendue"
+    },
+    "abort": {
+      "already_configured": "Ce compte est déjà configuré."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "stock_actuel": { "name": "Stock Actuel" },
+      "stock_kg": { "name": "Stock (kg)" },
+      "achats_saison": { "name": "Achats Saison" },
+      "brulages_saison": { "name": "Brûlages Saison" },
+      "achats_total": { "name": "Achats Totaux" },
+      "brulages_total": { "name": "Brûlages Totaux" },
+      "depenses_saison": { "name": "Dépenses Saison" },
+      "depenses_total": { "name": "Dépenses Totales" },
+      "moyenne_7j": { "name": "Moyenne 7j" },
+      "moyenne_mois": { "name": "Moyenne Mois" },
+      "moyenne_saison": { "name": "Moyenne Saison" },
+      "jours_restants": { "name": "Jours Restants" },
+      "vitre": { "name": "Nettoyage Vitre" },
+      "entretien": { "name": "Entretien" }
+    },
+    "button": {
+      "refresh_data": { "name": "Actualiser données" },
+      "burn_action": { "name": "Enregistrer un Brûlage" },
+      "purchase_action": { "name": "Enregistrer un Achat" }
+    },
+    "number": {
+      "quantite": { "name": "Quantité (sacs)" },
+      "prix": { "name": "Prix du sac" }
+    },
+    "text": {
+      "note": { "name": "Note Personnelle" }
+    }
+  }
+}

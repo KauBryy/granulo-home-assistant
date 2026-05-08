@@ -1,0 +1,51 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Granulo Configuration",
+        "description": "Enter your User ID (UID) from the Granulo app.",
+        "data": {
+          "user_id": "User ID (UID)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to Granulo servers",
+      "invalid_auth": "Invalid User ID",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This account is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "stock_actuel": { "name": "Current Stock" },
+      "stock_kg": { "name": "Stock (kg)" },
+      "achats_saison": { "name": "Season Purchases" },
+      "brulages_saison": { "name": "Season Burnings" },
+      "achats_total": { "name": "Total Purchases" },
+      "brulages_total": { "name": "Total Burnings" },
+      "depenses_saison": { "name": "Season Expenses" },
+      "depenses_total": { "name": "Total Expenses" },
+      "moyenne_7j": { "name": "7-day Average" },
+      "moyenne_mois": { "name": "Monthly Average" },
+      "moyenne_saison": { "name": "Season Average" },
+      "jours_restants": { "name": "Remaining Days" },
+      "vitre": { "name": "Glass Cleaning" },
+      "entretien": { "name": "Maintenance" }
+    },
+    "button": {
+      "refresh_data": { "name": "Refresh Data" },
+      "burn_action": { "name": "Record a Burn" },
+      "purchase_action": { "name": "Record a Purchase" }
+    },
+    "number": {
+      "quantite": { "name": "Bag Quantity" },
+      "prix": { "name": "Bag Price" }
+    },
+    "text": {
+      "note": { "name": "Personal Note" }
+    }
+  }
+}

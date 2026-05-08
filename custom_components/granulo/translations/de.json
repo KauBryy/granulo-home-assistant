@@ -1,0 +1,51 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Granulo Konfiguration",
+        "description": "Geben Sie Ihre Benutzer-ID (UID) aus der Granulo-App ein.",
+        "data": {
+          "user_id": "Benutzer-ID (UID)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zu Granulo-Servern fehlgeschlagen",
+      "invalid_auth": "Ungültige Benutzer-ID",
+      "unknown": "Unerwarteter Fehler"
+    },
+    "abort": {
+      "already_configured": "Dieses Konto ist bereits konfiguriert."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "stock_actuel": { "name": "Aktueller Vorrat" },
+      "stock_kg": { "name": "Vorrat (kg)" },
+      "achats_saison": { "name": "Saison Einkäufe" },
+      "brulages_saison": { "name": "Saison Verbrauch" },
+      "achats_total": { "name": "Einkäufe Gesamt" },
+      "brulages_total": { "name": "Verbrauch Gesamt" },
+      "depenses_saison": { "name": "Saison Ausgaben" },
+      "depenses_total": { "name": "Ausgaben Gesamt" },
+      "moyenne_7j": { "name": "7-Tage Durchschnitt" },
+      "moyenne_mois": { "name": "Monatlicher Durchschnitt" },
+      "moyenne_saison": { "name": "Saison Durchschnitt" },
+      "jours_restants": { "name": "Verbleibende Tage" },
+      "vitre": { "name": "Scheibenreinigung" },
+      "entretien": { "name": "Wartung" }
+    },
+    "button": {
+      "refresh_data": { "name": "Daten aktualisieren" },
+      "burn_action": { "name": "Verbrauch aufzeichnen" },
+      "purchase_action": { "name": "Einkauf aufzeichnen" }
+    },
+    "number": {
+      "quantite": { "name": "Menge (Säcke)" },
+      "prix": { "name": "Sackpreis" }
+    },
+    "text": {
+      "note": { "name": "Persönliche Notiz" }
+    }
+  }
+}

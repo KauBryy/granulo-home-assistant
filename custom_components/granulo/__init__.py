@@ -54,8 +54,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         }
         
         if collection == "bags":
-            doc_data["fields"]["price_per_sack"] = {"doubleValue": price}
-            doc_data["fields"]["price_total"] = {"doubleValue": price * amount}
+            doc_data["fields"]["price_total"] = {"doubleValue": price}
+            doc_data["fields"]["price_per_sack"] = {"doubleValue": price / amount if amount > 0 else 0.0}
         else:
             # Pour les brûlages, on ajoute la day_key (YYYY-MM-DD)
             day_key = datetime.utcnow().strftime("%Y-%m-%d")

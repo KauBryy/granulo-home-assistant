@@ -4,10 +4,39 @@ from homeassistant.helpers.entity import DeviceInfo
 
 async def async_setup_entry(hass, entry, async_add_entities):
     user_id = entry.data["user_id"]
-    async_add_entities([
+    # On récupère le coordinateur pour le bouton de rafraîchissement
+    # Note: Dans sensor.py on l'enregistre dans hass.data[DOMAIN][entry.entry_id]
+    coordinator = hass.data[DOMAIN].get(entry.entry_id)
+    
+    entities = [
         GranuloActionButton(user_id, "burn", "Granulo Poele Enregistrer un Brulage", "mdi:fire"),
         GranuloActionButton(user_id, "purchase", "Granulo Poele Enregistrer un Achat", "mdi:cart")
-    ])
+    ]
+    
+    if coordinator:
+        entities.append(GranuloRefreshButton(coordinator))
+        
+    async_add_entities(entities)
+
+class GranuloRefreshButton(ButtonEntity):
+    def __init__(self, coordinator):
+        self.coordinator = coordinator
+        self._attr_name = "Granulo Poele Actualiser"
+        self._attr_icon = "mdi:refresh"
+        self._attr_unique_id = f"granulo_refresh_v1_{coordinator.user_id}"
+
+    @property
+    def device_info(self):
+        return DeviceInfo(
+            identifiers={(DOMAIN, self.coordinator.user_id)},
+            name="Poêle Granulo",
+            manufacturer="Granulo App",
+            model="Expert Mode",
+        )
+
+    async def async_press(self) -> None:
+        """Force le rafraîchissement des données."""
+        await self.coordinator.async_refresh()
 
 class GranuloActionButton(ButtonEntity):
     def __init__(self, user_id, action_type, name, icon):

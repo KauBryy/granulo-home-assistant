@@ -9,7 +9,7 @@ from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
-SCAN_INTERVAL = timedelta(minutes=5)
+SCAN_INTERVAL = timedelta(minutes=360)
 PROJECT_ID = "granulo-446e4"
 # Split the key to avoid false positive GitGuardian alerts (Firebase Web API keys are public by design)
 API_KEY = "AIzaSyCmHG_" + "v4ymxmkNRiKc3" + "dU7PnIl_dV89u4c"

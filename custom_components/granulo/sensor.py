@@ -46,6 +46,7 @@ class GranuloDataCoordinator(DataUpdateCoordinator):
     def __init__(self, hass, user_id):
         super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL)
         self.user_id = user_id
+        self.last_refresh = None
 
     async def _fetch_all_documents(self, session, collection):
         """Récupère tous les documents pour faire les calculs en mémoire (comme l'app Flutter)."""
@@ -157,7 +158,7 @@ class GranuloDataCoordinator(DataUpdateCoordinator):
                     days_in_season = max(1, (now - season_start).days)
                     conso_quotidienne_20j = twenty_b["qty"] / 20.0
                     
-                    return {
+                    data = {
                         "stock_actuel": round(stock_sacks, 1),
                         "stock_kg": round(stock_sacks * default_weight, 1),
                         "achats_saison": round(season_p["qty"], 1),
@@ -173,6 +174,8 @@ class GranuloDataCoordinator(DataUpdateCoordinator):
                         "vitre": round(glass_b["qty"], 1),
                         "entretien": round(maint_b["qty"], 1)
                     }
+                    self.last_refresh = datetime.utcnow()
+                    return data
         except Exception as e:
             _LOGGER.error(f"Erreur Granulo Update: {e}")
             raise UpdateFailed(f"Error communicating with API: {e}")

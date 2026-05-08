@@ -21,9 +21,16 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class GranuloRefreshButton(ButtonEntity):
     def __init__(self, coordinator):
         self.coordinator = coordinator
-        self._attr_name = "Granulo Poele Actualiser"
+        self._attr_name = "Granulo Poele Actualiser données"
         self._attr_icon = "mdi:refresh"
         self._attr_unique_id = f"granulo_refresh_v1_{coordinator.user_id}"
+    
+    @property
+    def extra_state_attributes(self):
+        return {
+            "info": "Actualisation automatique toutes les 6 heures",
+            "last_refresh": self.coordinator.last_refresh.isoformat() if self.coordinator.last_refresh else "Inconnu"
+        }
 
     @property
     def device_info(self):

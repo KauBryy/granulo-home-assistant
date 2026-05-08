@@ -3,24 +3,24 @@ from .const import DOMAIN
 from homeassistant.helpers.entity import DeviceInfo
 
 async def async_setup_entry(hass, entry, async_add_entities):
-    coordinator = hass.data[DOMAIN][entry.entry_id]
+    user_id = entry.data["user_id"]
     async_add_entities([
-        GranuloActionButton(coordinator, "burn", "Granulo Poele Enregistrer un Brulage", "mdi:fire"),
-        GranuloActionButton(coordinator, "purchase", "Granulo Poele Enregistrer un Achat", "mdi:cart")
+        GranuloActionButton(user_id, "burn", "Granulo Poele Enregistrer un Brulage", "mdi:fire"),
+        GranuloActionButton(user_id, "purchase", "Granulo Poele Enregistrer un Achat", "mdi:cart")
     ])
 
 class GranuloActionButton(ButtonEntity):
-    def __init__(self, coordinator, action_type, name, icon):
-        self.coordinator = coordinator
+    def __init__(self, user_id, action_type, name, icon):
+        self.user_id = user_id
         self.action_type = action_type
         self._attr_name = name
         self._attr_icon = icon
-        self._attr_unique_id = f"granulo_btn_{coordinator.user_id}_{action_type}"
+        self._attr_unique_id = f"granulo_btn_v1_{user_id}_{action_type}"
 
     @property
     def device_info(self):
         return DeviceInfo(
-            identifiers={(DOMAIN, self.coordinator.user_id)},
+            identifiers={(DOMAIN, self.user_id)},
             name="Poêle Granulo",
             manufacturer="Granulo App",
             model="Expert Mode",

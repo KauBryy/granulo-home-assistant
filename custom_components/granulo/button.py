@@ -2,11 +2,15 @@ from homeassistant.components.button import ButtonEntity
 from .const import DOMAIN
 from homeassistant.helpers.entity import DeviceInfo
 
+import logging
+_LOGGER = logging.getLogger(__name__)
+
 async def async_setup_entry(hass, entry, async_add_entities):
     user_id = entry.data["user_id"]
     # On récupère le coordinateur pour le bouton de rafraîchissement
-    # Note: Dans sensor.py on l'enregistre dans hass.data[DOMAIN][entry.entry_id]
     coordinator = hass.data[DOMAIN].get(entry.entry_id)
+    
+    _LOGGER.debug(f"Granulo Button Setup: entry_id={entry.entry_id}, coordinator_found={coordinator is not None}")
     
     entities = [
         GranuloActionButton(user_id, "burn", "Granulo Poele Enregistrer un Brulage", "mdi:fire"),

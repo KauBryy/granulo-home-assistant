@@ -30,7 +30,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     user_id = entry.data.get("user_id")
 
     # On enregistre la plateforme sensor
-    await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "number", "text"])
+    await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "number", "text", "button"])
 
     # --- SERVICES ---
     async def handle_add_data(call: ServiceCall):

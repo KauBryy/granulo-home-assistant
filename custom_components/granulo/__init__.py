@@ -38,6 +38,33 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         note = call.data.get("note", "Ajouté via Home Assistant")
         price = call.data.get("price", 0.0)
         
+        # 💎 Vérification Premium avant action
+        settings_url = f"https://firestore.googleapis.com/v1/projects/{PROJECT_ID}/databases/(default)/documents/settings/{user_id}?key={API_KEY}"
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(settings_url) as resp:
+                    if resp.status == 200:
+                        s_data = await resp.json()
+                        is_premium = s_data.get("fields", {}).get("isPremium", {}).get("booleanValue", False)
+                        if not is_premium:
+                            _LOGGER.warning(f"Granulo: Action refusée, l'utilisateur {user_id} n'est pas Premium.")
+                            await hass.services.async_call(
+                                "persistent_notification",
+                                "create",
+                                {
+                                    "title": "Granulo Pro Requis",
+                                    "message": "Cette action est réservée aux abonnés Granulo+.",
+                                    "notification_id": "granulo_premium_error"
+                                }
+                            )
+                            return
+                    else:
+                        _LOGGER.error(f"Granulo: Impossible de vérifier le statut Premium ({resp.status})")
+                        return
+        except Exception as e:
+            _LOGGER.error(f"Granulo: Erreur vérification Premium: {e}")
+            return
+
         collection = "bags" if "purchase" in call.service else "burns"
         now = datetime.utcnow().isoformat() + "Z"
         

@@ -9,7 +9,7 @@ from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
-SCAN_INTERVAL = timedelta(minutes=15)
+SCAN_INTERVAL = timedelta(minutes=5)
 PROJECT_ID = "granulo-446e4"
 # Split the key to avoid false positive GitGuardian alerts (Firebase Web API keys are public by design)
 API_KEY = "AIzaSyCmHG_" + "v4ymxmkNRiKc3" + "dU7PnIl_dV89u4c"
@@ -105,6 +105,15 @@ class GranuloDataCoordinator(DataUpdateCoordinator):
                             init_stock_map = fields.get("initialStockByType", {}).get("mapValue", {}).get("fields", {})
                             for k, v in init_stock_map.items():
                                 initial_stock_sacks += float(v.get("doubleValue", 0.0) or v.get("integerValue", 0.0))
+                            
+                            # 💎 Vérification Premium
+                            is_premium = fields.get("isPremium", {}).get("booleanValue", False)
+                            if not is_premium:
+                                _LOGGER.warning(f"Granulo: L'utilisateur {self.user_id} n'est pas Premium. Accès refusé.")
+                                return {
+                                    "error": "Premium Requis",
+                                    "is_premium": False
+                                }
 
                     # 2. Fetch all data
                     all_purchases = await self._fetch_all_documents(session, "bags")
@@ -181,6 +190,8 @@ class GranuloSensor(SensorEntity):
     def state(self):
         if self.coordinator.data is None:
             return None
+        if "error" in self.coordinator.data:
+            return self.coordinator.data["error"]
         return self.coordinator.data.get(self.key)
 
     @property

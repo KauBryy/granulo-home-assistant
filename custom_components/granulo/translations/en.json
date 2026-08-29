@@ -48,7 +48,7 @@
       "note": { "name": "Personal Note" }
     },
     "select": {
-      "marque": { "name": "Pellet Brand" }
+      "marque": { "name": "Brand" }
     }
   }
 }

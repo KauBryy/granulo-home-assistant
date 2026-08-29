@@ -5,14 +5,14 @@ from homeassistant.helpers.entity import DeviceInfo
 async def async_setup_entry(hass, entry, async_add_entities):
     user_id = entry.data["user_id"]
     async_add_entities([
-        GranuloInputNumber(user_id, "quantite", "Granulo Poele Quantite", "sacs", "mdi:numeric", 1, 1000),
-        GranuloInputNumber(user_id, "prix", "Granulo Poele Prix", "€", "mdi:currency-eur", 0, 10000)
+        GranuloInputNumber(user_id, "quantite", "sacs", "mdi:numeric", 1, 1000),
+        GranuloInputNumber(user_id, "prix", "€", "mdi:currency-eur", 0, 10000)
     ])
 
 class GranuloInputNumber(NumberEntity):
     _attr_has_entity_name = True
 
-    def __init__(self, user_id, key, name, unit, icon, min_val, max_val):
+    def __init__(self, user_id, key, unit, icon, min_val, max_val):
         self.user_id = user_id
         self.key = key
         self._attr_translation_key = key
@@ -29,7 +29,7 @@ class GranuloInputNumber(NumberEntity):
     def device_info(self):
         return DeviceInfo(
             identifiers={(DOMAIN, self.user_id)},
-            name="Poêle Granulo",
+            name="Granulo Poele",
             manufacturer="Granulo App",
             model="Expert Mode",
         )

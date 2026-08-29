@@ -38,7 +38,7 @@ class GranuloRefreshButton(ButtonEntity):
     def device_info(self):
         return DeviceInfo(
             identifiers={(DOMAIN, self.coordinator.user_id)},
-            name="Poêle Granulo",
+            name="Granulo Poele",
             manufacturer="Granulo App",
             model="Expert Mode",
         )
@@ -61,7 +61,7 @@ class GranuloActionButton(ButtonEntity):
     def device_info(self):
         return DeviceInfo(
             identifiers={(DOMAIN, self.user_id)},
-            name="Poêle Granulo",
+            name="Granulo Poele",
             manufacturer="Granulo App",
             model="Expert Mode",
         )
@@ -85,7 +85,7 @@ class GranuloActionButton(ButtonEntity):
             brand = brand_state.state
         else:
             for s_id in self.hass.states.async_entity_ids("select"):
-                if "granulo" in s_id:
+                if "granulo" in s_id or "marque" in s_id:
                     st = self.hass.states.get(s_id)
                     if st and st.state:
                         brand = st.state

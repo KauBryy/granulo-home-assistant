@@ -27,8 +27,12 @@ class GranuloDataCoordinator(DataUpdateCoordinator):
                 async with aiohttp.ClientSession() as session:
                     async with session.get(url, params=params) as resp:
                         if resp.status == 200:
-                            data = await resp.json()
+                            json_resp = await resp.json()
                             self.last_refresh = datetime.now()
+                            if isinstance(json_resp, dict) and "data" in json_resp and isinstance(json_resp["data"], dict):
+                                data = json_resp["data"]
+                            else:
+                                data = json_resp
                             _LOGGER.debug("Granulo: Données reçues avec succès: %s", data)
                             return data
                         elif resp.status == 403:

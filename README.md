@@ -95,7 +95,7 @@ views:
               - entity: number.granulo_poele_quantite
                 name: Quantité (sacs)
               - entity: number.granulo_poele_prix
-                name: Prix unitaire du sac (€)
+                name: Prix unitaire (€)
               - entity: text.granulo_poele_note
                 name: Note optionnelle
 

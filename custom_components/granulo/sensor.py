@@ -44,17 +44,26 @@ class GranuloSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def native_value(self):
-        if self.coordinator.data is None:
+        if not self.coordinator.data or not isinstance(self.coordinator.data, dict):
             return None
         if "error" in self.coordinator.data:
-            return self.coordinator.data["error"]
-        return self.coordinator.data.get(self.key)
+            return None
+        val = self.coordinator.data.get(self.key)
+        if val is None and "data" in self.coordinator.data and isinstance(self.coordinator.data["data"], dict):
+            val = self.coordinator.data["data"].get(self.key)
+        return val
+
+    @property
+    def available(self) -> bool:
+        if not self.coordinator.data or not isinstance(self.coordinator.data, dict):
+            return False
+        return "error" not in self.coordinator.data
 
     @property
     def device_info(self):
         return DeviceInfo(
             identifiers={(DOMAIN, self.coordinator.user_id)},
-            name="Poêle Granulo",
+            name="Granulo Poele",
             manufacturer="Granulo App",
             model="Expert Mode",
         )

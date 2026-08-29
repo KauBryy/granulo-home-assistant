@@ -5,13 +5,13 @@ from homeassistant.helpers.entity import DeviceInfo
 async def async_setup_entry(hass, entry, async_add_entities):
     user_id = entry.data["user_id"]
     async_add_entities([
-        GranuloInputText(user_id, "note", "Granulo Poele Note", "mdi:text")
+        GranuloInputText(user_id, "note", "mdi:text")
     ])
 
 class GranuloInputText(TextEntity):
     _attr_has_entity_name = True
 
-    def __init__(self, user_id, key, name, icon):
+    def __init__(self, user_id, key, icon):
         self.user_id = user_id
         self.key = key
         self._attr_translation_key = key
@@ -23,7 +23,7 @@ class GranuloInputText(TextEntity):
     def device_info(self):
         return DeviceInfo(
             identifiers={(DOMAIN, self.user_id)},
-            name="Poêle Granulo",
+            name="Granulo Poele",
             manufacturer="Granulo App",
             model="Expert Mode",
         )

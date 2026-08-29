@@ -20,9 +20,11 @@ class GranuloBrandSelect(CoordinatorEntity, SelectEntity):
     @property
     def options(self) -> list[str]:
         """Retourne la liste des marques disponibles configurées dans Granulo."""
-        if self.coordinator.data and "custom_brands" in self.coordinator.data:
-            brands = self.coordinator.data.get("custom_brands", [])
-            if brands:
+        if self.coordinator.data and isinstance(self.coordinator.data, dict):
+            brands = self.coordinator.data.get("custom_brands")
+            if not brands and "data" in self.coordinator.data and isinstance(self.coordinator.data["data"], dict):
+                brands = self.coordinator.data["data"].get("custom_brands")
+            if brands and isinstance(brands, list) and len(brands) > 0:
                 return list(brands)
         return ["Générique"]
 
@@ -43,7 +45,7 @@ class GranuloBrandSelect(CoordinatorEntity, SelectEntity):
     def device_info(self):
         return DeviceInfo(
             identifiers={(DOMAIN, self.coordinator.user_id)},
-            name="Poêle Granulo",
+            name="Granulo Poele",
             manufacturer="Granulo App",
             model="Expert Mode",
         )

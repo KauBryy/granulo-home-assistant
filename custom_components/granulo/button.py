@@ -72,7 +72,6 @@ class GranuloActionButton(ButtonEntity):
         qty_entity = "number.granulo_poele_quantite"
         price_entity = "number.granulo_poele_prix"
         note_entity = "text.granulo_poele_note"
-        select_entity = "select.granulo_poele_marque"
 
         qty = float(self.hass.states.get(qty_entity).state or 1.0) if self.hass.states.get(qty_entity) else 1.0
         price = float(self.hass.states.get(price_entity).state or 0.0) if self.hass.states.get(price_entity) else 0.0
@@ -80,14 +79,21 @@ class GranuloActionButton(ButtonEntity):
 
         # Marque sélectionnée
         brand = None
-        brand_state = self.hass.states.get(select_entity)
-        if brand_state and brand_state.state:
-            brand = brand_state.state
-        else:
+        for candidate_id in [
+            "select.poele_granulo_marque_de_granules",
+            "select.granulo_poele_marque",
+            "select.poele_granulo_marque",
+        ]:
+            st = self.hass.states.get(candidate_id)
+            if st and st.state and st.state not in ("unknown", "unavailable"):
+                brand = st.state
+                break
+
+        if not brand:
             for s_id in self.hass.states.async_entity_ids("select"):
                 if "granulo" in s_id or "marque" in s_id:
                     st = self.hass.states.get(s_id)
-                    if st and st.state:
+                    if st and st.state and st.state not in ("unknown", "unavailable"):
                         brand = st.state
                         break
 

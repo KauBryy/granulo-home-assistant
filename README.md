@@ -8,9 +8,9 @@ Cette intégration connecte votre compte **Granulo** (gestion de stock de granul
 
 * **📦 Stock en temps réel :** Nombre de sacs restants et équivalent en kg.
 * **🏷️ Sélection de marque :** Choisissez vos marques de granulés configurées dans l'application lors de l'enregistrement.
-* **⏳ Autonomie :** Estimation du nombre de jours restants basée sur votre historique.
+* **⏳ Autonomie :** Estimation du nombre de jours restants basée sur votre historique et votre rythme de chauffe.
 * **🧹 Entretien :** Suivi des sacs brûlés depuis le dernier nettoyage de vitre et entretien régulier.
-* **❄️ Saison :** Statistiques des achats, brûlages et dépenses pour la saison de chauffe en cours.
+* **❄️ Saison :** Statistiques des achats, brûlages et dépenses pour la saison de chauffe en cours (calculées à l'identique de l'application).
 * **📈 Global :** Historique total des achats, brûlages et dépenses.
 * **📊 Moyennes :** Consommation moyenne sur 7 jours, mois en cours et saison.
 * **⚡ Actions rapides :** Boutons d'enregistrement direct (brûlage, achat, rafraîchissement).
@@ -69,8 +69,8 @@ views:
             show_name: true
             show_state: true
             entities:
-              - entity: sensor.granulo_poele_stock_kg
-                name: Stock (kg)
+              - entity: sensor.granulo_poele_achats_saison
+                name: Achats
               - entity: sensor.granulo_poele_brulages_saison
                 name: Brûlés
               - entity: sensor.granulo_poele_depenses_saison
@@ -90,7 +90,7 @@ views:
             title: ⚡ Enregistrement rapide
             show_header_toggle: false
             entities:
-              - entity: select.granulo_poele_marque
+              - entity: select.poele_granulo_marque_de_granules
                 name: Marque de granulés
               - entity: number.granulo_poele_quantite
                 name: Quantité (sacs)
@@ -157,8 +157,8 @@ cards:
     show_name: true
     show_state: true
     entities:
-      - entity: sensor.granulo_poele_stock_kg
-        name: Stock (kg)
+      - entity: sensor.granulo_poele_achats_saison
+        name: Achats
       - entity: sensor.granulo_poele_brulages_saison
         name: Brûlés
       - entity: sensor.granulo_poele_depenses_saison
@@ -178,7 +178,7 @@ cards:
     title: ⚡ Enregistrement rapide
     show_header_toggle: false
     entities:
-      - entity: select.granulo_poele_marque
+      - entity: select.poele_granulo_marque_de_granules
         name: Marque de granulés
       - entity: number.granulo_poele_quantite
         name: Quantité (sacs)

@@ -1,16 +1,13 @@
-from homeassistant.components.button import ButtonEntity
-from .const import DOMAIN
-from homeassistant.helpers.entity import DeviceInfo
-
 import logging
+from homeassistant.components.button import ButtonEntity
+from homeassistant.helpers.entity import DeviceInfo
+from .const import DOMAIN
+
 _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass, entry, async_add_entities):
     user_id = entry.data["user_id"]
-    # On récupère le coordinateur pour le bouton de rafraîchissement
     coordinator = hass.data[DOMAIN].get(entry.entry_id)
-    
-    _LOGGER.debug(f"Granulo Button Setup: entry_id={entry.entry_id}, coordinator_found={coordinator is not None}")
     
     entities = [
         GranuloActionButton(user_id, "burn", "Granulo Poele Enregistrer un Brulage", "mdi:fire"),
@@ -72,17 +69,30 @@ class GranuloActionButton(ButtonEntity):
     async def async_press(self) -> None:
         """Appelé quand on appuie sur le bouton."""
         # 1. Récupérer les valeurs des inputs
-        # On cherche les entités number et text créées par notre intégration
-        qty_entity = f"number.granulo_poele_quantite"
-        price_entity = f"number.granulo_poele_prix"
-        note_entity = f"text.granulo_poele_note"
+        qty_entity = "number.granulo_poele_quantite"
+        price_entity = "number.granulo_poele_prix"
+        note_entity = "text.granulo_poele_note"
+        select_entity = "select.granulo_poele_marque"
 
         qty = float(self.hass.states.get(qty_entity).state or 1.0) if self.hass.states.get(qty_entity) else 1.0
         price = float(self.hass.states.get(price_entity).state or 0.0) if self.hass.states.get(price_entity) else 0.0
         note = self.hass.states.get(note_entity).state if self.hass.states.get(note_entity) else "Ajouté via Home Assistant"
 
+        # Marque sélectionnée
+        brand = None
+        brand_state = self.hass.states.get(select_entity)
+        if brand_state and brand_state.state:
+            brand = brand_state.state
+        else:
+            for s_id in self.hass.states.async_entity_ids("select"):
+                if "granulo" in s_id:
+                    st = self.hass.states.get(s_id)
+                    if st and st.state:
+                        brand = st.state
+                        break
+
         # 2. Appeler le service correspondant
-        service_data = {"amount": qty, "note": note}
+        service_data = {"amount": qty, "note": note, "brand": brand}
         if self.action_type == "purchase":
             service_data["price"] = price
             await self.hass.services.async_call(DOMAIN, "add_purchase", service_data)

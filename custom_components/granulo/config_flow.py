@@ -10,7 +10,6 @@ class GranuloConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Étape initiale quand l'utilisateur ajoute l'intégration."""
         errors = {}
         if user_input is not None:
-            # On vérifie juste que l'UID ressemble à quelque chose (pas vide)
             if not user_input.get("user_id"):
                 errors["base"] = "user_id_missing"
             else:

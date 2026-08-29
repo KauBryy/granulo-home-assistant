@@ -46,6 +46,9 @@
     },
     "text": {
       "note": { "name": "Note Personnelle" }
+    },
+    "select": {
+      "marque": { "name": "Marque de granulés" }
     }
   }
 }

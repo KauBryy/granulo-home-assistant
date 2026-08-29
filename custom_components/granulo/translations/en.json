@@ -2,7 +2,7 @@
   "config": {
     "step": {
       "user": {
-        "title": "Granulo Configuration",
+        "title": "Granulo Setup",
         "description": "Enter your User ID (UID) from the Granulo app.",
         "data": {
           "user_id": "User ID (UID)"
@@ -23,12 +23,12 @@
       "stock_actuel": { "name": "Current Stock" },
       "stock_kg": { "name": "Stock (kg)" },
       "achats_saison": { "name": "Season Purchases" },
-      "brulages_saison": { "name": "Season Burnings" },
+      "brulages_saison": { "name": "Season Burns" },
       "achats_total": { "name": "Total Purchases" },
-      "brulages_total": { "name": "Total Burnings" },
+      "brulages_total": { "name": "Total Burns" },
       "depenses_saison": { "name": "Season Expenses" },
       "depenses_total": { "name": "Total Expenses" },
-      "moyenne_7j": { "name": "7-day Average" },
+      "moyenne_7j": { "name": "7-Day Average" },
       "moyenne_mois": { "name": "Monthly Average" },
       "moyenne_saison": { "name": "Season Average" },
       "jours_restants": { "name": "Remaining Days" },
@@ -37,15 +37,18 @@
     },
     "button": {
       "refresh_data": { "name": "Refresh Data" },
-      "burn_action": { "name": "Record a Burn" },
-      "purchase_action": { "name": "Record a Purchase" }
+      "burn_action": { "name": "Log a Burn" },
+      "purchase_action": { "name": "Log a Purchase" }
     },
     "number": {
-      "quantite": { "name": "Bag Quantity" },
-      "prix": { "name": "Bag Price" }
+      "quantite": { "name": "Quantity (bags)" },
+      "prix": { "name": "Price per bag" }
     },
     "text": {
       "note": { "name": "Personal Note" }
+    },
+    "select": {
+      "marque": { "name": "Pellet Brand" }
     }
   }
 }

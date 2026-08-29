@@ -1,3 +1,2 @@
 DOMAIN = "granulo"
-CONF_API_KEY = "api_key"
-DEFAULT_NAME = "Granulo"
+API_BASE_URL = "https://europe-west1-granulo-446e4.cloudfunctions.net"
